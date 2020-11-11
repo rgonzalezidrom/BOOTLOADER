@@ -32,8 +32,41 @@ baud EQU 38400			    ; standard baud rates: 115200 or 19200
 ;----- CONFIG4L Options -----
     CONFIG	STVREN = ON, LVP = OFF, DEBUG = OFF, XINST = OFF
 
+;Variable de retardo
+delayN EQU 0
+delayM EQU 0
+delayP EQU 0
 
-;----------------------------- PROGRAM ---------------------------------
+ 
+;Defino puerto del led y buzzer
+CLFR PORTA
+MCVLW b'11101111'
+MCVLF TRISA
+ 
+CLFR PORTD
+MCVLW b'00011111'
+MCVLF TRISD
+ 
+#define LEDA	PORTD,7
+#define LEDB	PORTD,6
+#define LEDC	PORTD,5
+#define BUZZER	PORTA,4
+ 
+BLINK_LED
+ MCVLW b'01011111'
+ MCVLF PORTD
+ 
+ MCVLW b'11101111'
+ MCVLF PORTA
+ ;retardo
+ MCVLW b'10111111'
+ MCVLF PORTD
+ 
+ MCVLW b'11111111'
+ MCVLF PORTA
+ 
+ 
+ ;----------------------------- PROGRAM ---------------------------------
 	cblock 0
 	crc
 	i
