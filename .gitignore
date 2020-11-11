@@ -1,0 +1,22 @@
+# Built application files
+*.obj
+*.tree
+*.zip
+*.cof
+*.lst
+*.map
+*.stat
+*.sln
+*.filters
+*.vcxproj
+*.mcw
+*.db
+*.mcs
+*.casm
+*.vs
+*.err
+*.lst
+*.o
+*.o.d
+# Log Files
+*.log
