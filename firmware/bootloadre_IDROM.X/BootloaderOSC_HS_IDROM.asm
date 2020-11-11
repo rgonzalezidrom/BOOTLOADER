@@ -19,6 +19,8 @@ baud EQU 38400			    ; standard baud rates: 115200 or 19200
 #define first_address max_flash-200 ;100 words
 
 #define app_init 0x0032
+ 
+
 		
 
 ;----- CONFIG1H Options -----
@@ -32,41 +34,7 @@ baud EQU 38400			    ; standard baud rates: 115200 or 19200
 ;----- CONFIG4L Options -----
     CONFIG	STVREN = ON, LVP = OFF, DEBUG = OFF, XINST = OFF
 
-;Variable de retardo
-delayN EQU 0
-delayM EQU 0
-delayP EQU 0
-
- 
-;Defino puerto del led y buzzer
-CLFR PORTA
-MCVLW b'11101111'
-MCVLF TRISA
- 
-CLFR PORTD
-MCVLW b'00011111'
-MCVLF TRISD
- 
-#define LEDA	PORTD,7
-#define LEDB	PORTD,6
-#define LEDC	PORTD,5
-#define BUZZER	PORTA,4
- 
-BLINK_LED
- MCVLW b'01011111'
- MCVLF PORTD
- 
- MCVLW b'11101111'
- MCVLF PORTA
- ;retardo
- MCVLW b'10111111'
- MCVLF PORTD
- 
- MCVLW b'11111111'
- MCVLF PORTA
- 
- 
- ;----------------------------- PROGRAM ---------------------------------
+;----------------------------- PROGRAM ---------------------------------
 	cblock 0
 	crc
 	i
@@ -76,6 +44,7 @@ BLINK_LED
 	counter_hi
 	counter_lo
 	flag
+	ledBlink
 	endc
 	cblock 10
 	buffer:64
@@ -106,7 +75,11 @@ SendL macro car
 	nop
 	org first_address+8
 IntrareBootloader
-	
+		
+	movlw b'01011111'
+	movwf TRISD
+	movwf PORTD
+	movwf ledBlink 
 				    ; init serial port
 	movlw b'00100100'
 	movwf TXSTA
@@ -233,6 +206,10 @@ notrcv
 	decfsz cnt2
 	bra rpt3
 	decfsz cnt1
+	;
+	comf ledBlink
+	movf ledBlink,PORTD
+	;
 	bra rpt2
 	;timeout:
 way_to_exit
