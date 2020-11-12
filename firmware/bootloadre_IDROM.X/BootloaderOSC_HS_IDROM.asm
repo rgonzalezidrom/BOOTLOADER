@@ -76,8 +76,9 @@ SendL macro car
 	org first_address+8
 IntrareBootloader
 		
-	movlw b'01011111'
+	movlw b'00011111'
 	movwf TRISD
+	movlw b'10111111'
 	movwf PORTD
 	movwf ledBlink 
 				    ; init serial port
@@ -201,15 +202,17 @@ rptc
 	return
 	
 notrcv
+	
+	;
+	comf ledBlink
+	movf ledBlink,PORTD
+	;
 	decfsz cnt3
 	bra rptc
 	decfsz cnt2
 	bra rpt3
 	decfsz cnt1
-	;
-	comf ledBlink
-	movf ledBlink,PORTD
-	;
+	
 	bra rpt2
 	;timeout:
 way_to_exit
