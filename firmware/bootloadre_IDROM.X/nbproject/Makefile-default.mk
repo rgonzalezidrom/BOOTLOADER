@@ -70,6 +70,7 @@ OBJECTFILES=${OBJECTDIR}/BootloaderOSC_HS_IDROM.o
 SOURCEFILES=BootloaderOSC_HS_IDROM.asm
 
 
+
 CFLAGS=
 ASFLAGS=
 LDLIBSOPTIONS=
@@ -90,7 +91,7 @@ endif
 	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
 MP_PROCESSOR_OPTION=18f4620
-MP_LINKER_DEBUG_OPTION=-r=ROM@0xFD30:0xFFFF -r=RAM@GPR:0xEF4:0xEFF
+MP_LINKER_DEBUG_OPTION= 
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
@@ -98,7 +99,7 @@ ${OBJECTDIR}/BootloaderOSC_HS_IDROM.o: BootloaderOSC_HS_IDROM.asm  nbproject/Mak
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/BootloaderOSC_HS_IDROM.o.d 
 	@${RM} ${OBJECTDIR}/BootloaderOSC_HS_IDROM.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/BootloaderOSC_HS_IDROM.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_ICD3=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.lst\" -e\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.o\" \"BootloaderOSC_HS_IDROM.asm\" 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/BootloaderOSC_HS_IDROM.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG  -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.lst\" -e\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.o\" \"BootloaderOSC_HS_IDROM.asm\" 
 	@${DEP_GEN} -d "${OBJECTDIR}/BootloaderOSC_HS_IDROM.o"
 	@${FIXDEPS} "${OBJECTDIR}/BootloaderOSC_HS_IDROM.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
@@ -118,7 +119,7 @@ endif
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w -x -u_DEBUG -z__ICD2RAM=1 -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -z__MPLAB_DEBUG=1 -z__MPLAB_DEBUGGER_ICD3=1 $(MP_LINKER_DEBUG_OPTION) -odist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
+	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w -x -u_DEBUG -z__ICD2RAM=1 -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -z__MPLAB_DEBUG=1 $(MP_LINKER_DEBUG_OPTION) -odist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
 else
 dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
