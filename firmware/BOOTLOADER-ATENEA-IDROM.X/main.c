@@ -4,33 +4,34 @@
  *
  * Created on 8 de noviembre de 2020, 23:39
  */
+
 // PIC18F4620 Configuration Bit Settings
 
 // 'C' source line config statements
 
 // CONFIG1H
-#pragma config OSC = INTIO67    // Oscillator Selection bits (Internal oscillator block, port function on RA6 and RA7)
+#pragma config OSC = HS         // Oscillator Selection bits (HS oscillator)
 #pragma config FCMEN = OFF      // Fail-Safe Clock Monitor Enable bit (Fail-Safe Clock Monitor disabled)
 #pragma config IESO = OFF       // Internal/External Oscillator Switchover bit (Oscillator Switchover mode disabled)
 
 // CONFIG2L
-#pragma config PWRT = OFF       // Power-up Timer Enable bit (PWRT disabled)
-#pragma config BOREN = SBORDIS  // Brown-out Reset Enable bits (Brown-out Reset enabled in hardware only (SBOREN is disabled))
-#pragma config BORV = 3         // Brown Out Reset Voltage bits (Minimum setting)
+#pragma config PWRT = ON        // Power-up Timer Enable bit (PWRT enabled)
+#pragma config BOREN = ON       // Brown-out Reset Enable bits (Brown-out Reset enabled and controlled by software (SBOREN is enabled))
+#pragma config BORV = 2         // Brown Out Reset Voltage bits ()
 
 // CONFIG2H
-#pragma config WDT = ON         // Watchdog Timer Enable bit (WDT enabled)
-#pragma config WDTPS = 32768    // Watchdog Timer Postscale Select bits (1:32768)
+#pragma config WDT = OFF        // Watchdog Timer Enable bit (WDT disabled (control is placed on the SWDTEN bit))
+#pragma config WDTPS = 128      // Watchdog Timer Postscale Select bits (1:128)
 
 // CONFIG3H
 #pragma config CCP2MX = PORTC   // CCP2 MUX bit (CCP2 input/output is multiplexed with RC1)
-#pragma config PBADEN = ON      // PORTB A/D Enable bit (PORTB<4:0> pins are configured as analog input channels on Reset)
+#pragma config PBADEN = OFF     // PORTB A/D Enable bit (PORTB<4:0> pins are configured as digital I/O on Reset)
 #pragma config LPT1OSC = OFF    // Low-Power Timer1 Oscillator Enable bit (Timer1 configured for higher power operation)
 #pragma config MCLRE = ON       // MCLR Pin Enable bit (MCLR pin enabled; RE3 input pin disabled)
 
 // CONFIG4L
 #pragma config STVREN = ON      // Stack Full/Underflow Reset Enable bit (Stack full/underflow will cause Reset)
-#pragma config LVP = ON         // Single-Supply ICSP Enable bit (Single-Supply ICSP enabled)
+#pragma config LVP = OFF        // Single-Supply ICSP Enable bit (Single-Supply ICSP disabled)
 #pragma config XINST = OFF      // Extended Instruction Set Enable bit (Instruction set extension and Indexed Addressing mode disabled (Legacy mode))
 
 // CONFIG5L
@@ -69,15 +70,15 @@
 #include <xc.h>
 #include "DrvControl_Usart.h"
 #include <stdio.h>
-#define _XTAL_FREQ 8000000L
+#define _XTAL_FREQ 16384000L
 
-#define LED_A LATCbits.LATC5
-#define LED_B LATCbits.LATC6
-#define LED_C LATCbits.LATC7
+#define LED_A LATDbits.LATD5
+#define LED_B LATDbits.LATD6
+#define LED_C LATDbits.LATD7
 
-#define BEGIN_LED_A TRISCbits.TRISC5 = 0
-#define BEGIN_LED_B TRISCbits.TRISC6 = 0
-#define BEGIN_LED_C TRISCbits.TRISC7 = 0
+#define BEGIN_LED_A TRISDbits.TRISD5 = 0
+#define BEGIN_LED_B TRISDbits.TRISD6 = 0
+#define BEGIN_LED_C TRISDbits.TRISD7 = 0
 
 #define BUZZER LATAbits.LA4
 #define BEGIN_BUZZER TRISAbits.TRISA4 = 0
@@ -113,13 +114,12 @@ void main(void) {
     BEGIN_BUZZER;
     BUZZER = 0;
     
-    OSCCON = 0b01110000;//0b01110011;
+    OSCCONbits.SCS = 0b00;//0b01110011;
     
     //TIMER
     T0CON = 0b10010111;
     
     RCONbits.IPEN = 1;
-    
     INTCONbits.GIE=1;
     INTCONbits.PEIE = 1;
     INTCON2bits.TMR0IP = 1;
@@ -128,9 +128,7 @@ void main(void) {
     
     TMR0H = 0XF0;
     TMR0L = 0XBD;
-    
-    while(!OSCCONbits.IOFS) continue;
-    
+        
     Usart_Initialize();
     Usart_TxEnabled(1);
     Usart_SendString("Bootloader - V2.1 - ATENEA IDROM-LT ... \n\r");

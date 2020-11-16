@@ -7,29 +7,29 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "main.c" 2
-# 12 "main.c"
-#pragma config OSC = INTIO67
+# 13 "main.c"
+#pragma config OSC = HS
 #pragma config FCMEN = OFF
 #pragma config IESO = OFF
 
 
-#pragma config PWRT = OFF
-#pragma config BOREN = SBORDIS
-#pragma config BORV = 3
+#pragma config PWRT = ON
+#pragma config BOREN = ON
+#pragma config BORV = 2
 
 
-#pragma config WDT = ON
-#pragma config WDTPS = 32768
+#pragma config WDT = OFF
+#pragma config WDTPS = 128
 
 
 #pragma config CCP2MX = PORTC
-#pragma config PBADEN = ON
+#pragma config PBADEN = OFF
 #pragma config LPT1OSC = OFF
 #pragma config MCLRE = ON
 
 
 #pragma config STVREN = ON
-#pragma config LVP = ON
+#pragma config LVP = OFF
 #pragma config XINST = OFF
 
 
@@ -4440,7 +4440,7 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\xc.h" 2 3
-# 69 "main.c" 2
+# 70 "main.c" 2
 
 # 1 "./DrvControl_Usart.h" 1
 # 15 "./DrvControl_Usart.h"
@@ -4456,7 +4456,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
  void Usart_Putc(unsigned char c);
  void Usart_Putcr(void);
  void Usart_SendString(const char *strc);
-# 70 "main.c" 2
+# 71 "main.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdio.h" 1 3
 # 24 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdio.h" 3
@@ -4596,8 +4596,8 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 71 "main.c" 2
-# 86 "main.c"
+# 72 "main.c" 2
+# 87 "main.c"
 volatile unsigned char flagLEd = 0;
 volatile unsigned char contFlagBuzzer = 0;
 
@@ -4618,23 +4618,22 @@ void __attribute__((picinterrupt(("high_priority")))) isrh(void)
 
 void main(void) {
 
-    TRISCbits.TRISC5 = 0;
-    LATCbits.LATC5 = 0;
-    TRISCbits.TRISC6 = 0;
-    LATCbits.LATC6 = 1;
-    TRISCbits.TRISC7 = 0;
-    LATCbits.LATC7 = 0;
+    TRISDbits.TRISD5 = 0;
+    LATDbits.LATD5 = 0;
+    TRISDbits.TRISD6 = 0;
+    LATDbits.LATD6 = 1;
+    TRISDbits.TRISD7 = 0;
+    LATDbits.LATD7 = 0;
 
     TRISAbits.TRISA4 = 0;
     LATAbits.LA4 = 0;
 
-    OSCCON = 0b01110000;
+    OSCCONbits.SCS = 0b00;
 
 
     T0CON = 0b10010111;
 
     RCONbits.IPEN = 1;
-
     INTCONbits.GIE=1;
     INTCONbits.PEIE = 1;
     INTCON2bits.TMR0IP = 1;
@@ -4643,8 +4642,6 @@ void main(void) {
 
     TMR0H = 0XF0;
     TMR0L = 0XBD;
-
-    while(!OSCCONbits.IOFS) continue;
 
     Usart_Initialize();
     Usart_TxEnabled(1);
@@ -4657,14 +4654,14 @@ void main(void) {
 
         if(flagLEd){
             flagLEd=0;
-            LATCbits.LATC5 = ~LATCbits.LATC5;
-            LATCbits.LATC6 = ~LATCbits.LATC6;
-            LATCbits.LATC7 = ~LATCbits.LATC7;
+            LATDbits.LATD5 = ~LATDbits.LATD5;
+            LATDbits.LATD6 = ~LATDbits.LATD6;
+            LATDbits.LATD7 = ~LATDbits.LATD7;
             if(contFlagBuzzer>=4){
                 LATAbits.LA4 = 1;
-                _delay((unsigned long)((50)*(8000000L/4000.0)));
+                _delay((unsigned long)((50)*(16384000L/4000.0)));
                 LATAbits.LA4 = 0;
-                _delay((unsigned long)((50)*(8000000L/4000.0)));
+                _delay((unsigned long)((50)*(16384000L/4000.0)));
                 contFlagBuzzer=0;
             }
 

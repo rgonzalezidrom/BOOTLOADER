@@ -70,7 +70,6 @@ OBJECTFILES=${OBJECTDIR}/BootloaderOSC_HS_IDROM.o
 SOURCEFILES=BootloaderOSC_HS_IDROM.asm
 
 
-
 CFLAGS=
 ASFLAGS=
 LDLIBSOPTIONS=
@@ -91,7 +90,7 @@ endif
 	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
 MP_PROCESSOR_OPTION=18f4620
-MP_LINKER_DEBUG_OPTION= 
+MP_LINKER_DEBUG_OPTION=-r=ROM@0xFD30:0xFFFF -r=RAM@GPR:0xEF4:0xEFF
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)

@@ -8,10 +8,10 @@
 //#include <system.h>
 #include <xc.h>
 //#pragma CLOCK_FREQ 16384000
-#define _XTAL_FREQ 8000000UL
+#define _XTAL_FREQ 16384000UL
 
 #include "DrvControl_Usart.h"
-long baudios = 9600;
+long baudios = 19200;
 
 void Usart_Initialize(void)
 {
@@ -24,7 +24,7 @@ void Usart_Initialize(void)
 	SPBRG = 0x34;										// 19200 bauds at 16.384 Mhz clock.
 	//spbrg = 0x1A;										// 38400 bauds at 16.384 Mhz clock.
     
-    SPBRG = 51;
+    //SPBRG = 51;
 	
 	
     //txsta = 0x06;										// Transmision & reception disabled. 

@@ -24,15 +24,15 @@ baud EQU 38400			    ; standard baud rates: 115200 or 19200
 		
 
 ;----- CONFIG1H Options -----
-    ;CONFIG	OSC = HS, FCMEN = OFF, IESO = OFF
+    CONFIG	OSC = HS, FCMEN = OFF, IESO = OFF
 ;----- CONFIG2L Options -----
-    ;CONFIG	PWRT = ON, BOREN = ON, BORV = 2
+    CONFIG	PWRT = ON, BOREN = ON, BORV = 2
 ;----- CONFIG2H Options -----
-    ;CONFIG	WDT = OFF, WDTPS = 128
+    CONFIG	WDT = OFF, WDTPS = 128
 ;----- CONFIG3H Options -----
-    ;CONFIG	MCLRE = ON, LPT1OSC = OFF, PBADEN = OFF, CCP2MX = PORTC
+    CONFIG	MCLRE = ON, LPT1OSC = OFF, PBADEN = OFF, CCP2MX = PORTC
 ;----- CONFIG4L Options -----
-    ;CONFIG	STVREN = ON, LVP = OFF, DEBUG = OFF, XINST = OFF
+    CONFIG	STVREN = ON, LVP = OFF, DEBUG = OFF, XINST = OFF
 
 ;----------------------------- PROGRAM ---------------------------------
 	cblock 0

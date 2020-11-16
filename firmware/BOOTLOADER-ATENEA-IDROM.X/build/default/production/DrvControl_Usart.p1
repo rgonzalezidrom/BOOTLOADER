@@ -529,10 +529,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4620.h: 6715: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "14 DrvControl_Usart.c
-[; ;DrvControl_Usart.c: 14: long baudios = 9600;
+[; ;DrvControl_Usart.c: 14: long baudios = 19200;
 [v _baudios `l ~T0 @X0 1 e ]
 [i _baudios
--> -> 9600 `i `l
+-> -> 19200 `i `l
 ]
 "16
 [; ;DrvControl_Usart.c: 16: void Usart_Initialize(void)
@@ -551,9 +551,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "24
 [; ;DrvControl_Usart.c: 24:  SPBRG = 0x34;
 [e = _SPBRG -> -> 52 `i `uc ]
-"27
-[; ;DrvControl_Usart.c: 27:     SPBRG = 51;
-[e = _SPBRG -> -> 51 `i `uc ]
 "33
 [; ;DrvControl_Usart.c: 33:  TXSTA = 0x06;
 [e = _TXSTA -> -> 6 `i `uc ]

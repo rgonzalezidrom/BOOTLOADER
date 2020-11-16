@@ -4410,7 +4410,7 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
  void Usart_SendString(const char *strc);
 # 13 "DrvControl_Usart.c" 2
 
-long baudios = 9600;
+long baudios = 19200;
 
 void Usart_Initialize(void)
 {
@@ -4421,14 +4421,7 @@ void Usart_Initialize(void)
 
 
  SPBRG = 0x34;
-
-
-    SPBRG = 51;
-
-
-
-
-
+# 33 "DrvControl_Usart.c"
  TXSTA = 0x06;
  RCSTA = 0x80;
  INTCONbits.GIEL = 1;
