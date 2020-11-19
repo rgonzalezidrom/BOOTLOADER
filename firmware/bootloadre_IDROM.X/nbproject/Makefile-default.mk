@@ -28,13 +28,13 @@ CP=cp
 CND_CONF=default
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 IMAGE_TYPE=debug
-OUTPUT_SUFFIX=cof
-DEBUGGABLE_SUFFIX=cof
+OUTPUT_SUFFIX=hex
+DEBUGGABLE_SUFFIX=elf
 FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 else
 IMAGE_TYPE=production
 OUTPUT_SUFFIX=hex
-DEBUGGABLE_SUFFIX=cof
+DEBUGGABLE_SUFFIX=elf
 FINAL_IMAGE=dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 endif
 
@@ -70,6 +70,7 @@ OBJECTFILES=${OBJECTDIR}/BootloaderOSC_HS_IDROM.o
 SOURCEFILES=BootloaderOSC_HS_IDROM.asm
 
 
+
 CFLAGS=
 ASFLAGS=
 LDLIBSOPTIONS=
@@ -89,40 +90,43 @@ ifneq ($(INFORMATION_MESSAGE), )
 endif
 	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
-MP_PROCESSOR_OPTION=18f4620
-MP_LINKER_DEBUG_OPTION=-r=ROM@0xFD30:0xFFFF -r=RAM@GPR:0xEF4:0xEFF
+MP_PROCESSOR_OPTION=PIC18F4620
 # ------------------------------------------------------------------------------------
-# Rules for buildStep: assemble
+# Rules for buildStep: pic-as-assembler
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/BootloaderOSC_HS_IDROM.o: BootloaderOSC_HS_IDROM.asm  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/BootloaderOSC_HS_IDROM.o: BootloaderOSC_HS_IDROM.asm  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/BootloaderOSC_HS_IDROM.o.d 
 	@${RM} ${OBJECTDIR}/BootloaderOSC_HS_IDROM.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/BootloaderOSC_HS_IDROM.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG  -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.lst\" -e\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.o\" \"BootloaderOSC_HS_IDROM.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/BootloaderOSC_HS_IDROM.o"
-	@${FIXDEPS} "${OBJECTDIR}/BootloaderOSC_HS_IDROM.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	${MP_AS} -mcpu=PIC18F4620 -c \
+	-o ${OBJECTDIR}/BootloaderOSC_HS_IDROM.o \
+	BootloaderOSC_HS_IDROM.asm \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
 else
-${OBJECTDIR}/BootloaderOSC_HS_IDROM.o: BootloaderOSC_HS_IDROM.asm  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/BootloaderOSC_HS_IDROM.o: BootloaderOSC_HS_IDROM.asm  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/BootloaderOSC_HS_IDROM.o.d 
 	@${RM} ${OBJECTDIR}/BootloaderOSC_HS_IDROM.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/BootloaderOSC_HS_IDROM.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.lst\" -e\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/BootloaderOSC_HS_IDROM.o\" \"BootloaderOSC_HS_IDROM.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/BootloaderOSC_HS_IDROM.o"
-	@${FIXDEPS} "${OBJECTDIR}/BootloaderOSC_HS_IDROM.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	${MP_AS} -mcpu=PIC18F4620 -c \
+	-o ${OBJECTDIR}/BootloaderOSC_HS_IDROM.o \
+	BootloaderOSC_HS_IDROM.asm \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -fmax-errors=20 -mwarn=0 -xassembler-with-cpp
 	
 endif
 
 # ------------------------------------------------------------------------------------
-# Rules for buildStep: link
+# Rules for buildStep: pic-as-linker
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w -x -u_DEBUG -z__ICD2RAM=1 -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -z__MPLAB_DEBUG=1 $(MP_LINKER_DEBUG_OPTION) -odist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
+	${MP_LD} -mcpu=PIC18F4620 ${OBJECTFILES_QUOTED_IF_SPACED} \
+	-o dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -mcallgraph=std -mno-download-hex
 else
 dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w  -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -odist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
+	${MP_LD} -mcpu=PIC18F4620 ${OBJECTFILES_QUOTED_IF_SPACED} \
+	-o dist/${CND_CONF}/${IMAGE_TYPE}/bootloadre_IDROM.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} \
+	 -misa=std -msummary=+mem,-psect,-class,-hex,-file,-sha1,-sha256,-xml,-xmlfull -mcallgraph=std -mno-download-hex
 endif
 
 

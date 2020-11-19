@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>BOOTLOADER-ATENEA-IDROM</name>
+            <name>FIRST-FIRMWARE-LOAD-ATENEA-IDROM</name>
             <creation-uuid>5a63ae76-f5db-48d2-bcaa-da184f8fed90</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>

@@ -27,7 +27,7 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"16 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\BOOTLOADER-ATENEA-IDROM.X\DrvControl_Usart.c
+"16 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\FIRST-FIRMWARE-LOAD-ATENEA-IDROM.X\DrvControl_Usart.c
 [v _Usart_Initialize Usart_Initialize `(v  1 e 1 0 ]
 "48
 [v _Usart_TxEnabled Usart_TxEnabled `(v  1 e 1 0 ]
@@ -35,7 +35,7 @@
 [v _Usart_Putc Usart_Putc `(v  1 e 1 0 ]
 "87
 [v _Usart_SendString Usart_SendString `(v  1 e 1 0 ]
-"91 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\BOOTLOADER-ATENEA-IDROM.X\main.c
+"91 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\FIRST-FIRMWARE-LOAD-ATENEA-IDROM.X\main.c
 [v _isrh isrh `IIH(v  1 e 1 0 ]
 "105
 [v _main main `(v  1 e 1 0 ]
@@ -321,7 +321,7 @@
 [v _INTCONbits INTCONbits `VES89  1 e 1 @4082 ]
 "8172
 [v _TMR0IF TMR0IF `VEb  1 e 0 @32658 ]
-"87 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\BOOTLOADER-ATENEA-IDROM.X\main.c
+"87 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\FIRST-FIRMWARE-LOAD-ATENEA-IDROM.X\main.c
 [v _flagLEd flagLEd `VEuc  1 e 1 0 ]
 "88
 [v _contFlagBuzzer contFlagBuzzer `VEuc  1 e 1 0 ]
@@ -330,7 +330,7 @@
 {
 "156
 } 0
-"48 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\BOOTLOADER-ATENEA-IDROM.X\DrvControl_Usart.c
+"48 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\FIRST-FIRMWARE-LOAD-ATENEA-IDROM.X\DrvControl_Usart.c
 [v _Usart_TxEnabled Usart_TxEnabled `(v  1 e 1 0 ]
 {
 [v Usart_TxEnabled@action action `uc  1 a 1 wreg ]
@@ -358,7 +358,7 @@
 {
 "36
 } 0
-"91 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\BOOTLOADER-ATENEA-IDROM.X\main.c
+"91 C:\Users\frami\Documents\GitHub\BOOTLOADER\firmware\FIRST-FIRMWARE-LOAD-ATENEA-IDROM.X\main.c
 [v _isrh isrh `IIH(v  1 e 1 0 ]
 {
 "103
