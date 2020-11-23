@@ -17,8 +17,8 @@ El firmware de producion del bootloader es un archivo binario con extencion hexa
 
 Para cargar el bootloader al microcontrolador pic18f4620 el fabricante de las PCB o responsable técnico requiere de un programdor de pic, de la microchip, podemos usar el PITkit4 o el ICD 3. en el siguiente documento se muestra los pasos para que el personal técnico lo pueda realizar desde la placa *Atenea Mainboard*
 
-[embed]/contenido/IT-16-Ed-1-Carga-de-bootloader-en-Mainboard.pdf[/embed]
 
+![]([embed]/contenido/IT-16-Ed-1-Carga-de-bootloader-en-Mainboard.pdf[/embed])
 
 ## Programa de carga par hex 
  En la carpeta BootLoader IdromLT, se encuentre el programa para cargar los progrmas Hexadecimales (.hex), este programa se usa luedo de tener cargado el bootloader al pic
